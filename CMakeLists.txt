@@ -124,7 +124,7 @@ if(CMAKE_USE_LIBBPF_PACKAGE)
 endif()
 
 if(NOT PYTHON_ONLY)
-  find_package(LLVM REQUIRED CONFIG)
+  find_package(LLVM REQUIRED CONFIG HINTS /usr/lib/llvm-15/cmake)
   message(STATUS "Found LLVM: ${LLVM_INCLUDE_DIRS} ${LLVM_PACKAGE_VERSION} (Use LLVM_ROOT envronment variable for another version of LLVM)")
 
   if(ENABLE_CLANG_JIT)
@@ -140,7 +140,7 @@ if(NOT PYTHON_ONLY)
 
     # clang is linked as a library, but the library path searching is
     # primitively supported, unlike libLLVM
-    set(CLANG_SEARCH "/opt/local/llvm/lib;/usr/lib/llvm-3.7/lib;${LLVM_LIBRARY_DIRS}")
+    set(CLANG_SEARCH "/usr/lib/llvm-15/lib;${LLVM_LIBRARY_DIRS}")
     find_library(libclangAnalysis NAMES clangAnalysis clang-cpp HINTS ${CLANG_SEARCH})
     find_library(libclangAST NAMES clangAST clang-cpp HINTS ${CLANG_SEARCH})
     find_library(libclangBasic NAMES clangBasic clang-cpp HINTS ${CLANG_SEARCH})
